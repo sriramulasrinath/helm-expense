@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: joindevops/frontend:{{ .Values.deployment.imageversion }}
+        image: joindevops/frontend:{{ .Values.deployment.imageVersion }}
         volumeMounts:
             - name: nginx-conf
               mountPath: /etc/nginx/nginx.conf
