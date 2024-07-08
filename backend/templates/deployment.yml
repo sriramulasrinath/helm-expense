@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: backend
+  namespace: expense 
+  labels: 
+    component: backend 
+    project: expense 
+    tier: db
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      component: backend 
+      project: expense 
+      tier: db
+  template:
+    metadata:
+      labels: 
+        component: backend 
+        project: expense 
+        tier: db
+    spec:
+      containers:
+      - name: backend
+        image: joindevops/backend:{{ .Values.deployment.imageversion }}
+        envFrom:
+        - configMapRef:
+            name: backend
