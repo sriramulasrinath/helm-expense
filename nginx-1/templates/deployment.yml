@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: nginx-deploy
+   #  these labels are deployment related labels
+  labels:
+    app: nginx
+    purpose: helm 
+spec:
+  # modify replicas according to your case
+  replicas: {{ .Values.deployment.replicas}} 
+  selector: 
+    matchLabels:
+      app: nginx
+      purpose: helm 
+        # pod definition
+  template: 
+    metadata:
+      labels:
+        app: nginx
+        purpose: helm 
+        extra-key: extra-value
+    spec:
+      containers:
+      - name: nginx 
+        image: nginx:{{ .Values.deployment.imageVersion }}
